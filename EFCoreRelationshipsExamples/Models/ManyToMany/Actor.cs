@@ -7,6 +7,7 @@ namespace EFCoreRelationshipsExamples.Models.ManyToMany
         public int Id { get; set; }
         public string Name { get; set; }
 
+        /* EF Relations */
         public List<ActorMovie> ActorMovies { get; set; }
     }
 }

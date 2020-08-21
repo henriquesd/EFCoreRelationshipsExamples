@@ -1,6 +1,7 @@
 ﻿using EFCoreRelationshipsExamples.Models.ManyToMany;
 using EFCoreRelationshipsExamples.Models.OneToMany;
 using EFCoreRelationshipsExamples.Models.OneToMany.FullyDefinedRelationships;
+using EFCoreRelationshipsExamples.Models.OneToOne;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreRelationshipsExamples
@@ -17,6 +18,7 @@ namespace EFCoreRelationshipsExamples
         {
             OneToManyRelationshipConfiguration(modelBuilder);
             ManyToManyRelationshipConfiguration(modelBuilder);
+            OneToOneRelationshipConfiguration(modelBuilder);
         }
 
         private void OneToManyRelationshipConfiguration(ModelBuilder modelBuilder)
@@ -52,6 +54,14 @@ namespace EFCoreRelationshipsExamples
                 .HasForeignKey(am => am.MovieId);
         }
 
+        private void OneToOneRelationshipConfiguration(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Author>()
+                .HasOne(a => a.Biography)
+                .WithOne(b => b.Author)
+                .HasForeignKey<AuthorBiography>(b => b.AuthorId);
+        }
+
         public DbSet<Course> Courses { get; set; }
         public DbSet<Student> Students { get; set; }
 
@@ -61,5 +71,8 @@ namespace EFCoreRelationshipsExamples
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<ActorMovie> ActorMovies { get; set; }
+
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<AuthorBiography> AuthorBiographies { get; set; }
     }
 }

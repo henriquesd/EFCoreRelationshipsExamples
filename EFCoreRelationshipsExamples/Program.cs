@@ -2,6 +2,7 @@
 using EFCoreRelationshipsExamples.Models.ManyToMany;
 using EFCoreRelationshipsExamples.Models.OneToMany;
 using EFCoreRelationshipsExamples.Models.OneToMany.FullyDefinedRelationships;
+using EFCoreRelationshipsExamples.Models.OneToOne;
 
 namespace EFCoreRelationshipsExamples
 {
@@ -14,6 +15,7 @@ namespace EFCoreRelationshipsExamples
                 OneToManyRelationship(context);
                 OneToManyFullyDefinedRelationships(context);
                 ManyToManyRelationship(context);
+                OneToOneRelationship(context);
             }
         }
 
@@ -71,6 +73,17 @@ namespace EFCoreRelationshipsExamples
             context.Add(actorMovies1);
             context.Add(actorMovies2);
             context.Add(actorMovies3);
+            context.SaveChanges();
+        }
+
+        private static void OneToOneRelationship(EFCoreRelationshipsExamplesDbContext context)
+        {
+            var author = new Author { Name = "Robert Cecil Martin" };
+            context.Add(author);
+            context.SaveChanges();
+
+            var authorBiography = new AuthorBiography { AuthorId = author.Id, PlaceOfBirth = "Palo Alto - California" };
+            context.Add(authorBiography);
             context.SaveChanges();
         }
     }
