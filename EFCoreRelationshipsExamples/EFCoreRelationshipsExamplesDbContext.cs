@@ -1,4 +1,5 @@
 ﻿using EFCoreRelationshipsExamples.Models.OneToMany;
+using EFCoreRelationshipsExamples.Models.OneToMany.FullyDefinedRelationships;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreRelationshipsExamples
@@ -35,5 +36,8 @@ namespace EFCoreRelationshipsExamples
 
         public DbSet<Course> Courses { get; set; }
         public DbSet<Student> Students { get; set; }
+
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using EFCoreRelationshipsExamples.Models.OneToMany;
+using EFCoreRelationshipsExamples.Models.OneToMany.FullyDefinedRelationships;
 
 namespace EFCoreRelationshipsExamples
 {
@@ -10,6 +11,7 @@ namespace EFCoreRelationshipsExamples
             using (var context = new EFCoreRelationshipsExamplesDbContext())
             {
                 OneToManyRelationship(context);
+                OneToManyRelationshipFullyDefinedRelationships(context);
             }
         }
 
@@ -27,6 +29,23 @@ namespace EFCoreRelationshipsExamples
                 }
             };
             context.Add(course);
+            context.SaveChanges();
+        }
+
+        private static void OneToManyRelationshipFullyDefinedRelationships(EFCoreRelationshipsExamplesDbContext context)
+        {
+            var customer = new Customer
+            {
+                Name = "Robert",
+                Orders = new List<Order>()
+                {
+                    new Order { Description = "Order 1" },
+                    new Order { Description = "Order 2" },
+                    new Order { Description = "Order 3" },
+                    new Order { Description = "Order 4" }
+                }
+            };
+            context.Add(customer);
             context.SaveChanges();
         }
     }
