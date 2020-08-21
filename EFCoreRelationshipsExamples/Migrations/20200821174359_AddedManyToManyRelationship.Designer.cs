@@ -3,14 +3,16 @@ using EFCoreRelationshipsExamples;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EFCoreRelationshipsExamples.Migrations
 {
     [DbContext(typeof(EFCoreRelationshipsExamplesDbContext))]
-    partial class EFCoreRelationshipsExamplesDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200821174359_AddedManyToManyRelationship")]
+    partial class AddedManyToManyRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

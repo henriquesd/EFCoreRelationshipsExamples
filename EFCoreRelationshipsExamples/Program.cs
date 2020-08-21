@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using EFCoreRelationshipsExamples.Models.ManyToMany;
 using EFCoreRelationshipsExamples.Models.OneToMany;
 using EFCoreRelationshipsExamples.Models.OneToMany.FullyDefinedRelationships;
 
@@ -11,7 +12,8 @@ namespace EFCoreRelationshipsExamples
             using (var context = new EFCoreRelationshipsExamplesDbContext())
             {
                 OneToManyRelationship(context);
-                OneToManyRelationshipFullyDefinedRelationships(context);
+                OneToManyFullyDefinedRelationships(context);
+                ManyToManyRelationship(context);
             }
         }
 
@@ -32,7 +34,7 @@ namespace EFCoreRelationshipsExamples
             context.SaveChanges();
         }
 
-        private static void OneToManyRelationshipFullyDefinedRelationships(EFCoreRelationshipsExamplesDbContext context)
+        private static void OneToManyFullyDefinedRelationships(EFCoreRelationshipsExamplesDbContext context)
         {
             var customer = new Customer
             {
@@ -46,6 +48,29 @@ namespace EFCoreRelationshipsExamples
                 }
             };
             context.Add(customer);
+            context.SaveChanges();
+        }
+
+        private static void ManyToManyRelationship(EFCoreRelationshipsExamplesDbContext context)
+        {
+            var actor1 = new Actor { Name = "Marlon Brando" };
+            var actor2 = new Actor { Name = "Al Pacino" };
+            context.Add(actor1);
+            context.Add(actor2);
+
+            var movie1 = new Movie { Name = "The Godfather" };
+            var movie2 = new Movie { Name = "Scarface" };
+            context.Add(movie1);
+            context.Add(movie2);
+            context.SaveChanges();
+
+            var actorMovies1 = new ActorMovie() { ActorId = actor1.Id, MovieId = movie1.Id };
+            var actorMovies2 = new ActorMovie() { ActorId = actor2.Id, MovieId = movie1.Id };
+            var actorMovies3 = new ActorMovie() { ActorId = actor2.Id, MovieId = movie2.Id };
+
+            context.Add(actorMovies1);
+            context.Add(actorMovies2);
+            context.Add(actorMovies3);
             context.SaveChanges();
         }
     }
